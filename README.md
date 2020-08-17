@@ -4,6 +4,8 @@ Provisioning script for local workstation
 Tested with
  - Fedora 32 Workstation
 
+## Ansible command
+ansible-playbook playbook/workstation.yml --ask-become-pass
 
 ## Vars
 ```
