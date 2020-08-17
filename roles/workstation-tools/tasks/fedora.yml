@@ -43,71 +43,12 @@
     dest: "/usr/bin/"
   become: yes 
 
-- name: Install VSCode Flatpak (Fedora)
+- name: Install Flatpaks (Fedora)
   flatpak:
-    name: com.visualstudio.code
+    name: "{{ item }}"
     state: present
   become: yes
-
-- name: Install Atom Flatpak (Fedora)
-  flatpak:
-    name: io.atom.Atom
-    state: present
-  become: yes
-
-- name: Install Signal Flatpak (Fedora)
-  flatpak:
-    name: org.signal.Signal
-    state: present
-  become: yes
-
-- name: Install Telegram Flatpak (Fedora)
-  flatpak:
-    name: org.telegram.desktop
-    state: present
-  become: yes
-
-- name: Install VLC Flatpak (Fedora)
-  flatpak:
-    name: org.videolan.VLC
-    state: present
-  become: yes
-
-- name: Install Rocket.Chat Flatpak (Fedora)
-  flatpak:
-    name: chat.rocket.RocketChat
-    state: present
-  become: yes
-
-- name: Install Anydesk Flatpak (Fedora)
-  flatpak: 
-    name: com.anydesk.Anydesk
-    state: present
-  become: yes
-
-- name: Install Bitwarden Flatpak (Fedora)
-  flatpak: 
-    name: com.bitwarden.desktop
-    state: present
-  become: yes
-
-- name: Install Firefox Flatpak (Fedora)
-  flatpak: 
-    name: org.mozilla.firefox
-    state: present
-  become: yes
-
-- name: Install Remmina Flatpak (Fedora)
-  flatpak: 
-    name: org.remmina.Remmina
-    state: present
-  become: yes
-
-- name: Install Jitis-Meet Flatpak (Fedora)
-  flatpak: 
-    name: org.jitsi.jitsi-meet
-    state: present
-  become: yes
+  loop: "{{ flatpaks }}"
 
 - name: Install dnf-plugins-core (Fedora)
   dnf:
