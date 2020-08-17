@@ -1,0 +1,116 @@
+---
+- name: Download Packer from Packer.IO (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/packer_{{ packer_version }}_linux_amd64.zip"
+
+- name: Download Vagrant from VagrantUP (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
+
+- name: Download Terraform from Terraform.IO (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+
+- name: Download Vault from VaultProject.IO (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip"
+
+- name: Unpack Packer.IO (Fedora)
+  unarchive: 
+    src: "{{ download_dir }}/packer_{{ packer_version }}_linux_amd64.zip" 
+    dest: "/usr/bin/"
+  become: yes
+
+- name: Unpack Vagrant (Fedora)
+  unarchive: 
+    src: "{{ download_dir }}/vagrant_{{ vagrant_version }}_linux_amd64.zip" 
+    dest: "/usr/bin/"
+  become: yes
+
+- name: Unpack Terraform (Fedora)
+  unarchive: 
+    src: "{{ download_dir }}/terraform_{{ terraform_version }}_linux_amd64.zip" 
+    dest: "/usr/bin/"
+  become: yes
+
+- name: Unpack Vault.IO (Fedora)
+  unarchive: 
+    src: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip" 
+    dest: "/usr/bin/"
+  become: yes 
+
+- name: Install VSCode Flatpak (Fedora)
+  flatpak:
+    name: com.visualstudio.code
+    state: present
+  become: yes
+
+- name: Install Atom Flatpak (Fedora)
+  flatpak:
+    name: io.atom.Atom
+    state: present
+  become: yes
+
+- name: Install Signal Flatpak (Fedora)
+  flatpak:
+    name: org.signal.Signal
+    state: present
+  become: yes
+
+- name: Install Telegram Flatpak (Fedora)
+  flatpak:
+    name: org.telegram.desktop
+    state: present
+  become: yes
+
+- name: Install VLC Flatpak (Fedora)
+  flatpak:
+    name: org.videolan.VLC
+    state: present
+  become: yes
+
+- name: Install Rocket.Chat Flatpak (Fedora)
+  flatpak:
+    name: chat.rocket.RocketChat
+    state: present
+  become: yes
+
+- name: Install Anydesk Flatpak (Fedora)
+  flatpak: 
+    name: com.anydesk.Anydesk
+    state: present
+  become: yes
+
+- name: Install Bitwarden Flatpak (Fedora)
+  flatpak: 
+    name: com.bitwarden.desktop
+    state: present
+  become: yes
+
+- name: Install Firefox Flatpak (Fedora)
+  flatpak: 
+    name: org.mozilla.firefox
+    state: present
+  become: yes
+
+- name: Install Remmina Flatpak (Fedora)
+  flatpak: 
+    name: org.remmina.Remmina
+    state: present
+  become: yes
+
+- name: Install Jitis-Meet Flatpak (Fedora)
+  flatpak: 
+    name: org.jitsi.jitsi-meet
+    state: present
+  become: yes
+
+- name: Install dnf-plugins-core (Fedora)
+  dnf:
+    name: dnf-plugins-core
+    state: latest
+  become: yes 
