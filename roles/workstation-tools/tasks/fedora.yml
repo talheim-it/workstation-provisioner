@@ -55,3 +55,17 @@
     name: dnf-plugins-core
     state: latest
   become: yes 
+
+- name: Get Virtualbox (Fedora)
+  get_url:
+    url: "{{ virtualbox_url }}"
+    dest: "{{ download_dir }}/VirtualBox_amd64.run"
+
+- name: Set permissions for Installation (Fedora)
+  file:
+    path: "{{ download_dir }}/VirtualBox_amd64.run"
+    mode: u+rwx
+
+- name: Install Virtualbox (Fedora)
+  command: "{{ download_dir }}/VirtualBox_amd64.run"
+  become: yes

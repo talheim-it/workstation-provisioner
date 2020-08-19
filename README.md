@@ -40,4 +40,5 @@ vault_version: 1.5.0
        - org.mozilla.firefox
        - org.remmina.Remmina
        - org.jitsi.jitsi-meet
+     virtualbox_url: https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1.12-139181-Linux_amd64.run  
 ```
