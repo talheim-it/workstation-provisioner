@@ -19,29 +19,51 @@
     url: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
     dest: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip"
 
+- name: Download Consul from Consul.IO (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/consul_{{ consul_version }}_linux_amd64.zip"
+
+- name: Download Nomad from NomadProject.IO (Fedora)
+  get_url:
+    url: "https://releases.hashicorp.com/nomad/{{ nomad_version }}/nomad_{{ nomad_version }}_linux_amd64.zip"
+    dest: "{{ download_dir }}/nomad_{{ nomad_version }}_linux_amd64.zip"
+
 - name: Unpack Packer.IO (Fedora)
-  unarchive: 
-    src: "{{ download_dir }}/packer_{{ packer_version }}_linux_amd64.zip" 
+  unarchive:
+    src: "{{ download_dir }}/packer_{{ packer_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
   become: yes
 
 - name: Unpack Vagrant (Fedora)
-  unarchive: 
-    src: "{{ download_dir }}/vagrant_{{ vagrant_version }}_linux_amd64.zip" 
+  unarchive:
+    src: "{{ download_dir }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
   become: yes
 
 - name: Unpack Terraform (Fedora)
-  unarchive: 
-    src: "{{ download_dir }}/terraform_{{ terraform_version }}_linux_amd64.zip" 
+  unarchive:
+    src: "{{ download_dir }}/terraform_{{ terraform_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
   become: yes
 
 - name: Unpack Vault.IO (Fedora)
-  unarchive: 
-    src: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip" 
+  unarchive:
+    src: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
-  become: yes 
+  become: yes
+
+- name: Unpack Consul.IO (Fedora)
+  unarchive:
+    src: "{{ download_dir }}/consul_{{ consul_version }}_linux_amd64.zip"
+    dest: "/usr/bin/"
+  become: yes
+
+- name: Unpack Nomad.IO (Fedora)
+  unarchive:
+    src: "{{ download_dir }}/nomad_{{ nomad_version }}_linux_amd64.zip"
+    dest: "/usr/bin/"
+  become: yes
 
 - name: Install Flatpaks (Fedora)
   flatpak:

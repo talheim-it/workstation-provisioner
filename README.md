@@ -14,6 +14,9 @@ packer_version: 1.6.1
 vagrant_version: 2.2.9
 terraform_version: 0.13.0
 vault_version: 1.5.0
+consul_version: 1.8.3
+nomad_version: 0.12.3
+virtualbox_url: https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1.12-139181-Linux_amd64.run
 ```
 
 ## Example playbook
@@ -28,6 +31,8 @@ vault_version: 1.5.0
      vagrant_version: 2.2.9
      terraform_version: 0.13.0
      vault_version: 1.5.0
+     consul_version: 1.8.3
+     nomad_version: 0.12.3
      flatpaks:
        - com.visualstudio.code
        - io.atom.Atom
@@ -42,5 +47,6 @@ vault_version: 1.5.0
        - org.jitsi.jitsi-meet
        - io.dbeaver.DBeaverCommunity
        - im.riot.Riot
+       - com.microsoft.Teams
      virtualbox_url: https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1.12-139181-Linux_amd64.run  
 ```
