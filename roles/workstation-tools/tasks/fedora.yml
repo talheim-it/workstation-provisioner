@@ -18,6 +18,21 @@
     name: "{{ username }}"
     shell: "{{ shell }}"
 
+- name: Clone Zsh Autosuggestion-Plugin (Fedora)
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ user_zsh_plugin_path }}/zsh-autosuggestions"
+  
+- name: Clone Zsh Syntax-Highlighting-Plugin (Fedora)
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ user_zsh_plugin_path }}/zsh-syntax-highlighting"
+
+- name: Clone Zsh Completion-Plugin (Fedora)
+  git:
+    repo: https://github.com/zsh-users/zsh-completions.git
+    dest: "{{ user_zsh_plugin_path }}/zsh-completions"
+
 - name: Copy zshrc.j2 template (Fedora)
   template:
     src: zshrc.j2

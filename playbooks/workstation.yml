@@ -4,9 +4,10 @@
   roles:
      - workstation-tools
   vars:
-     username: username 
+     username: username
      shell: /usr/bin/zsh 
-     download_dir: /home/username/Data/wks_downloads
+     user_zsh_plugin_path: /home/username/.oh-my-zsh/plugins
+     download_dir: /home/titrumbold/Data/wks_downloads
      packer_version: 1.6.1
      vagrant_version: 2.2.9
      terraform_version: 0.13.0

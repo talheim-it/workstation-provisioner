@@ -11,6 +11,7 @@ ansible-playbook playbook/workstation.yml --ask-become-pass
 ```
 username: username
 shell: /usr/bin/zsh
+user_zsh_plugin_path: /home/username/.oh-my-zsh/plugins
 download_dir: /home/username/Data/wks_downloads
 packer_version: 1.6.1
 vagrant_version: 2.2.9
@@ -29,8 +30,9 @@ virtualbox_url: https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1
      - workstation-tools
   vars:
      username: username
-     shell: /usr/bin/zsh 
-     download_dir: /home/username/Data/wks_downloads
+     shell: /usr/bin/zsh
+     user_zsh_plugin_path: /home/username/.oh-my-zsh/plugins
+     download_dir: /home/titrumbold/Data/wks_downloads
      packer_version: 1.6.1
      vagrant_version: 2.2.9
      terraform_version: 0.13.0
@@ -42,7 +44,7 @@ virtualbox_url: https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1
        - curl
        - zsh
        - git
-       - vim 
+       - vim
        - gem
        - powerline
        - vim-powerline
