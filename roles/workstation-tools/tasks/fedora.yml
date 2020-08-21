@@ -1,4 +1,30 @@
 ---
+- name: Install Packages (Fedora)
+  dnf:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  loop:
+    - "{{ packages }}"
+    
+- name: Install Colorls (Fedora)
+  gem:
+    name: colorls
+    state: latest
+  become: yes
+
+- name: Make zsh to default Shell (Fedora)
+  user:
+    name: "{{ username }}"
+    shell: "{{ shell }}"
+
+- name: Copy zshrc.j2 template (Fedora)
+  template:
+    src: zshrc.j2
+    dest: "/home/{{ username }}/.zshrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
 - name: Download Packer from Packer.IO (Fedora)
   get_url:
     url: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
