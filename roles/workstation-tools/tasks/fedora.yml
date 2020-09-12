@@ -6,17 +6,65 @@
   become: yes
   loop:
     - "{{ packages }}"
-    
+
+- name: Install brave repo (Fedora)
+  shell: dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+  become: yes
+
+- name: Install Brave-Browser (Fedora)
+  dnf:
+    name: brave-browser
+    state: latest
+    disable_gpg_check: yes
+  become: yes
+
+- name: Create folder .oh-my-zsh (Fedora)
+  file:
+    path: "{{ username }}/.oh-my-zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+  become: yes
+
 - name: Install Colorls (Fedora)
   gem:
     name: colorls
     state: latest
+    user_install: no
   become: yes
+
+- name: Download zsh installer (Fedora)
+  get_url: 
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+
+- name: make zsh-installer.sh executable (Fedora)
+  file:
+    path: /tmp/zsh-installer.sh
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+  become: yes
+
+#- name: Execute the zsh-installer.sh
+#  shell: nohup /tmp/zsh-installer.sh
+
+- name: Remove the zsh-installer.sh (Fedora)
+  file: 
+    path: /tmp/zsh-installer.sh 
+    state: absent
 
 - name: Make zsh to default Shell (Fedora)
   user:
     name: "{{ username }}"
     shell: "{{ shell }}"
+  become: yes
+
+- name: Clone Power10k Zsh Theme (Fedora)
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git 
+    dest: "/home/{{ username }}/.oh-my-zsh/themes/powerlevel10k
+    "
 
 - name: Clone Zsh Autosuggestion-Plugin (Fedora)
   git:
@@ -74,61 +122,61 @@
   unarchive:
     src: "{{ download_dir }}/packer_{{ packer_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
 
 - name: Unpack Vagrant (Fedora)
   unarchive:
     src: "{{ download_dir }}/vagrant_{{ vagrant_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
 
 - name: Unpack Terraform (Fedora)
   unarchive:
     src: "{{ download_dir }}/terraform_{{ terraform_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
 
 - name: Unpack Vault.IO (Fedora)
   unarchive:
     src: "{{ download_dir }}/vault_{{ vault_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
 
 - name: Unpack Consul.IO (Fedora)
   unarchive:
     src: "{{ download_dir }}/consul_{{ consul_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
 
 - name: Unpack Nomad.IO (Fedora)
   unarchive:
     src: "{{ download_dir }}/nomad_{{ nomad_version }}_linux_amd64.zip"
     dest: "/usr/bin/"
+    remote_src: yes
   become: yes
+
+- name: Add flathub repo
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
 
 - name: Install Flatpaks (Fedora)
   flatpak:
     name: "{{ item }}"
     state: present
-  become: yes
-  loop: "{{ flatpaks }}"
+    method: user
+  loop: "{{ flatpaks }}" 
 
-- name: Install dnf-plugins-core (Fedora)
+- name: Install VirtualBox (Fedora)
   dnf:
-    name: dnf-plugins-core
-    state: latest
-  become: yes 
-
-- name: Get Virtualbox (Fedora)
-  get_url:
-    url: "{{ virtualbox_url }}"
-    dest: "{{ download_dir }}/VirtualBox_amd64.run"
-
-- name: Set permissions for Installation (Fedora)
-  file:
-    path: "{{ download_dir }}/VirtualBox_amd64.run"
-    mode: u+rwx
-
-- name: Install Virtualbox (Fedora)
-  command: "{{ download_dir }}/VirtualBox_amd64.run"
+    name: "{{ virtualbox_url }}"
+    state: present
+    disable_gpg_check: yes
   become: yes
